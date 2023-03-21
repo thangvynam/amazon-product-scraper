@@ -3,7 +3,10 @@ var scrapeApi = require('../vendor/scrapeApi.js');
 exports.getByKeyWord = (req, res, next) => {
     try {
         var queryParameter = req.query;
-        scrapeApi.getListProductByKey()
+        console.log(queryParameter);
+        const keyword = queryParameter.keyword;
+        
+        scrapeApi.getListProductByKeyword(keyword)
             .then(result => {
                 res.json({
                     ok: true,

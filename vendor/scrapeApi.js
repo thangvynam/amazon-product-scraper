@@ -1,13 +1,12 @@
 const http = require("https");
-const axios = require('axios');
+const config = require("../config/config")
 
-exports.getListProductByKey = () => {
-
+exports.getListProductByKeyword = (keyword) => {
     const options = {
         "method": "GET",
-        "hostname": "ecom.webscrapingapi.com",
+        "hostname": config.vendor.hostVendor,
         "port": null,
-        "path": "/v1?engine=amazon&api_key=61LK5fPcqMRATWjBZWiYLP8t04QcuKd2&type=search&q=memory%20ca",
+        "path": config.vendor.pathSearchByKeyWord + keyword,
         "headers": {}
     };
 
