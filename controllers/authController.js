@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const config = require("../config/config")
 
 exports.login = (req, res, next) => {
     try {
@@ -13,5 +14,5 @@ exports.login = (req, res, next) => {
 };
 
 function generateAccessToken(id) {
-    return jwt.sign({id: id}, process.env.TOKEN_SECRET, { expiresIn: '7d' });
+    return jwt.sign({id: id}, config.app.tokenSecret, { expiresIn: '7d' });
 }
