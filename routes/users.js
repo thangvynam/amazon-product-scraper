@@ -1,10 +1,10 @@
-const express = require('express');
+import { Router } from 'express';
 
-const router = express.Router();
+const router = Router();
 
 /* GET users listing. */
 router.get('/', (req, res) => {
   res.send('respond with a resource');
 });
 
-module.exports = router;
+export default router;

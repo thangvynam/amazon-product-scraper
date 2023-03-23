@@ -1,11 +1,11 @@
-const scrapeApi = require('../vendor/scrapeApi');
+import getListProductByKeyword from '../vendor/scrapeApi.js';
 
-exports.getByKeyWord = (req, res, next) => {
+export default function getByKeyWord(req, res, next) {
   try {
     const queryParameter = req.query;
     const { keyword } = queryParameter;
 
-    scrapeApi.getListProductByKeyword(keyword).then((result) => {
+    getListProductByKeyword(keyword).then((result) => {
       res.json({
         ok: true,
         data: result,
@@ -14,4 +14,4 @@ exports.getByKeyWord = (req, res, next) => {
   } catch (error) {
     next(error);
   }
-};
+}

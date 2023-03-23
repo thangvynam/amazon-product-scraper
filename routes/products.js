@@ -1,9 +1,9 @@
-const express = require('express');
+import { Router } from 'express';
 
-const router = express.Router();
+import getByKeyWord from '../controllers/productController.js';
 
-const productController = require('../controllers/productController');
+const router = Router();
 
-router.get('/', productController.getByKeyWord);
+router.get('/', getByKeyWord);
 
-module.exports = router;
+export default router;

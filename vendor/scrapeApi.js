@@ -1,7 +1,7 @@
-const http = require('https');
-const config = require('../config/config');
+import { request as _request } from 'https';
+import config from '../config/config.js';
 
-exports.getListProductByKeyword = (keyword) => {
+export default function getListProductByKeyword(keyword) {
   const options = {
     method: 'GET',
     hostname: config.vendor.hostVendor,
@@ -11,7 +11,7 @@ exports.getListProductByKeyword = (keyword) => {
   };
 
   return new Promise((resolve) => {
-    const request = http.request(options, (response) => {
+    const request = _request(options, (response) => {
       const chunks = [];
 
       response.on('data', (chunk) => {
@@ -26,4 +26,4 @@ exports.getListProductByKeyword = (keyword) => {
 
     request.end();
   });
-};
+}

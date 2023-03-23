@@ -1,31 +1,31 @@
-const createError = require('http-errors');
-const express = require('express');
-const path = require('path');
-const cookieParser = require('cookie-parser');
-const logger = require('morgan');
-const dotenv = require('dotenv');
+import createError from 'http-errors';
+import express, { json, urlencoded } from 'express';
+import cookieParser from 'cookie-parser';
+import logger from 'morgan';
+import { config } from 'dotenv';
 
-const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
-const productsRouter = require('./routes/products');
-const authRouter = require('./routes/auth').default;
-const authMiddleware = require('./middleware/auth');
+import indexRouter from './routes/index.js';
+import usersRouter from './routes/users.js';
+import productsRouter from './routes/products.js';
+import authRouter from './routes/auth.js';
+
+import authMiddleware from './middleware/auth.js';
 
 const app = express();
 
 // load environment variables
-dotenv.config();
+config();
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+// app.set('views', join(__dirname, 'views'));
+// app.set('view engine', 'jade');
 
 app.use(authMiddleware);
 app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(json());
+app.use(urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+// app.use(express.static(join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
@@ -48,4 +48,4 @@ app.use((err, req, res) => {
   res.render('error');
 });
 
-module.exports = app;
+export default app;

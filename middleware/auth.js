@@ -1,7 +1,7 @@
-const jwt = require('jsonwebtoken');
-const config = require('../config/config');
+import { verify } from 'jsonwebtoken';
+import config from '../config/config.js';
 
-module.exports = (req, res, next) => {
+export default (req, res, next) => {
   const authHeader = req.headers.authorization;
   const token = authHeader && authHeader.split(' ')[1];
 
@@ -13,7 +13,7 @@ module.exports = (req, res, next) => {
   }
 
   try {
-    return jwt.verify(token, config.app.tokenSecret, (err, user) => {
+    return verify(token, config.app.tokenSecret, (err, user) => {
       if (err) {
         return res.status(403).json({
           ok: false,

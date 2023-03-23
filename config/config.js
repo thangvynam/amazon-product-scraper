@@ -1,7 +1,7 @@
-const dotenv = require('dotenv');
+import { config as _config } from 'dotenv';
 
 // load environment variables
-dotenv.config();
+_config();
 
 const env = process.env.NODE_ENV; // 'dev' or 'prod'
 
@@ -40,4 +40,4 @@ const config = {
   prod,
 };
 
-module.exports = config[env];
+export default config[env];

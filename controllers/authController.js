@@ -1,11 +1,11 @@
-const jwt = require('jsonwebtoken');
-const config = require('../config/config');
+import sign from 'jsonwebtoken';
+import config from '../config/config.js';
 
 function generateAccessToken(id) {
-  return jwt.sign({ id }, config.app.tokenSecret, { expiresIn: '7d' });
+  return sign({ id }, config.app.tokenSecret, { expiresIn: '7d' });
 }
 
-exports.login = (req, res, next) => {
+export default function login(req, res, next) {
   try {
     const token = generateAccessToken(req.body.username);
     res.json({
@@ -15,4 +15,4 @@ exports.login = (req, res, next) => {
   } catch (err) {
     next(err);
   }
-};
+}
