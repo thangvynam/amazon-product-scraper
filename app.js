@@ -20,7 +20,6 @@ config();
 // app.set('views', join(__dirname, 'views'));
 // app.set('view engine', 'jade');
 
-app.use(authMiddleware);
 app.use(logger('dev'));
 app.use(json());
 app.use(urlencoded({ extended: false }));
@@ -29,7 +28,7 @@ app.use(cookieParser());
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/products', productsRouter);
+app.use('/products', authMiddleware, productsRouter);
 app.use('/auth', authRouter);
 
 // catch 404 and forward to error handler

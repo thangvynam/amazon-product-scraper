@@ -1,8 +1,8 @@
-import sign from 'jsonwebtoken';
+import jsonwebtoken from 'jsonwebtoken';
 import config from '../config/config.js';
 
 function generateAccessToken(id) {
-  return sign({ id }, config.app.tokenSecret, { expiresIn: '7d' });
+  return jsonwebtoken.sign({ id }, config.app.tokenSecret, { expiresIn: '7d' });
 }
 
 export default function login(req, res, next) {
