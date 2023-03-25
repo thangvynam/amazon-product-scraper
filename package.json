@@ -12,7 +12,7 @@
     "server:prod": "node ./dist/bin/www",
     "dev": "NODE_ENV=development npm-run-all server",
     "clean": "rimraf dist",
-    "build": "babel ./ --out-dir dist",
+    "build": "babel . --ignore node_modules --out-dir dist",
     "prod": "NODE_ENV=production npm-run-all clean build server:prod",
     "watch": "nodemon"
   },
