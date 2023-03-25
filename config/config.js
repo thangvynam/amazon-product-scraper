@@ -7,6 +7,7 @@ const config = {
   app: {
     tokenSecret: process.env.TOKEN_SECRET,
     env: process.env.NODE_ENV, // 'dev' or 'prod'
+    userName: process.env.USER_NAME.split(','),
   },
   vendor: {
     hostVendor: process.env.HOST_VENDOR,
