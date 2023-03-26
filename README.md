@@ -4,18 +4,20 @@ This README would normally document whatever steps are necessary to get your app
 
 ### What is this repository for? ###
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+* Quick summary: The useful tool to scrape products information from Amazon via WebScrapingApi
+* Version 1.0.0 
 
 ### How do I get set up? ###
 
 * Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
+    * `npm i`
 * How to run tests
-* Deployment instructions
+    * `npm run test`
+* How to run development 
+    * `npm run watch`
+* Build instructions
+    * `npm run build`
+
 
 ### Contribution guidelines ###
 
