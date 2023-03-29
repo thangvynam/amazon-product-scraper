@@ -7,7 +7,7 @@
   "scripts": {
     "lint": "eslint ./",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npm run prod",
+    "start": "node ./bin/www",
     "server": "babel-node ./bin/www",
     "server:prod": "node ./dist/bin/www",
     "dev": "NODE_ENV=dev npm-run-all server",
