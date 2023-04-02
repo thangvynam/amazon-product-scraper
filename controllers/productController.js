@@ -23,19 +23,19 @@ export function getDataViaLink(req, res, next) {
     const { engine, link } = queryParameter;
 
     if (config.extractRule[engine] == null) {
-      res.status(400).json({
+      return res.status(400).json({
         ok: false,
         error: 'Bad request with undefined extractRule',
       });
     }
 
-    getHtmlAndExtract(link, config.extractRule[engine].rule).then((result) => {
+    return getHtmlAndExtract(link, config.extractRule[engine].rule).then((result) => {
       res.json({
         ok: true,
         data: result,
       });
     });
   } catch (error) {
-    next(error);
+    return next(error);
   }
 }
