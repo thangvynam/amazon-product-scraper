@@ -9,7 +9,7 @@ import usersRouter from './routes/users.js';
 import productsRouter from './routes/products.js';
 import authRouter from './routes/auth.js';
 
-import authMiddleware from './middleware/auth.js';
+import authMiddleware from './middlewares/auth.js';
 
 const app = express();
 
