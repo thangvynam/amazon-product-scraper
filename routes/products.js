@@ -1,9 +1,10 @@
 import { Router } from 'express';
 
-import getByKeyWord from '../controllers/productController.js';
+import { getAmazonDataByKeyWord, getDataViaLink } from '../controllers/productController.js';
 
 const router = Router();
 
-router.get('/', getByKeyWord);
+router.get('/amazon/', getAmazonDataByKeyWord);
+router.get('/', getDataViaLink);
 
 export default router;

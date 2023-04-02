@@ -1,11 +1,27 @@
-import getListProductByKeyword from '../vendor/scrapeApi.js';
+import { getHtmlAndExtract, getListAmazonProductByKeyword } from '../vendor/scrapeApi.js';
 
-export default function getByKeyWord(req, res, next) {
+export function getAmazonDataByKeyWord(req, res, next) {
   try {
     const queryParameter = req.query;
     const { keyword } = queryParameter;
 
-    getListProductByKeyword(keyword).then((result) => {
+    getListAmazonProductByKeyword(keyword).then((result) => {
+      res.json({
+        ok: true,
+        data: result,
+      });
+    });
+  } catch (error) {
+    next(error);
+  }
+}
+
+export function getDataViaLink(req, res, next) {
+  try {
+    const queryParameter = req.query;
+    const { link } = queryParameter;
+
+    getHtmlAndExtract(link).then((result) => {
       res.json({
         ok: true,
         data: result,
