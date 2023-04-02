@@ -11,11 +11,16 @@ const config = {
   },
   vendor: {
     hostVendor: process.env.HOST_VENDOR,
-    apiKey: process.env.API_KEY,
     pathSearchByKeyWord: `${process.env.PATH_SEARCH_BY_KEYWORD}`.replace(
       'API_KEY',
-      process.env.API_KEY,
+      process.env.API_KEY_AMAZON,
     ),
+    apiKeyAbstract: process.env.API_KEY_ABSTRACT_SCRAPING,
+  },
+  extractRule: {
+    lazada: {
+      rule: process.env.EXTRACT_RULE_LAZADA,
+    },
   },
 };
 

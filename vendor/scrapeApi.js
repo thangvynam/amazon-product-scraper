@@ -3,7 +3,7 @@ import webScrapingApiClient from 'webscrapingapi';
 
 import config from '../config/config.js';
 
-const client = new webScrapingApiClient('ZbHDHviySZod8ScdlTfp4rA9gorbQLV9');
+const client = new webScrapingApiClient(config.vendor.apiKeyAbstract);
 
 export function getListAmazonProductByKeyword(keyword) {
   const options = {
@@ -32,7 +32,6 @@ export function getListAmazonProductByKeyword(keyword) {
   });
 }
 
-// https://www.lazada.vn/catalog/?q=nokia&from=input
 export async function getHtmlAndExtract(link, extractRule) {
   const response = await client.get(
     link,
@@ -47,6 +46,10 @@ export async function getHtmlAndExtract(link, extractRule) {
       extract_rules: extractRule,
     },
   );
+
+  if (!response.success) {
+    console.error(response.error);
+  }
 
   return !response.success ? [] : response.response.body;
 }
