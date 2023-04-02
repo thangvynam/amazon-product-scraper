@@ -1,0 +1,113 @@
+{
+	"info": {
+		"_postman_id": "75eaddd2-da9e-49f9-9fec-8f87981b965f",
+		"name": "WebScrapingAPI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "3604402"
+	},
+	"item": [
+		{
+			"name": "{{prod}}/auth",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"nam-thang\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{prod}}/auth",
+					"host": [
+						"{{prod}}"
+					],
+					"path": [
+						"auth"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "{{local}}/products?engine=amazon&type=search&keyword=test",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Im5hbS10aGFuZyIsImlhdCI6MTY4MDA4MTQ4NSwiZXhwIjoxNjgwNjg2Mjg1fQ.SSXKc6QKyAkOnixszJZxg5JIqMBG8Ibky1ymof1JGvY",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{local}}/products?engine=lazada&link=https://www.lazada.vn/catalog/?q=vai%26from=input",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"products"
+					],
+					"query": [
+						{
+							"key": "engine",
+							"value": "lazada"
+						},
+						{
+							"key": "link",
+							"value": "https://www.lazada.vn/catalog/?q=vai%26from=input"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "{{local}}/products?engine=amazon&type=search&keyword=test",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Im5hbS10aGFuZyIsImlhdCI6MTY4MDA4MTQ4NSwiZXhwIjoxNjgwNjg2Mjg1fQ.SSXKc6QKyAkOnixszJZxg5JIqMBG8Ibky1ymof1JGvY",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{local}}/products/amazon?keywork=pokemon",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"products",
+						"amazon"
+					],
+					"query": [
+						{
+							"key": "keywork",
+							"value": "pokemon"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
