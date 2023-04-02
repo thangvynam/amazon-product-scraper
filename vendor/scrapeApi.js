@@ -3,6 +3,7 @@ import webScrapingApiClient from 'webscrapingapi';
 
 import config from '../config/config.js';
 
+// eslint-disable-next-line new-cap
 const client = new webScrapingApiClient(config.vendor.apiKeyAbstract);
 
 export function getListAmazonProductByKeyword(keyword) {

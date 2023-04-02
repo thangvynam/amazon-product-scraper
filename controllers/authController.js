@@ -20,11 +20,11 @@ export default function login(req, res, next) {
     }
 
     const token = generateAccessToken(req.body.username);
-    res.json({
+    return res.json({
       username: req.body.username,
       token,
     });
   } catch (err) {
-    next(err);
+    return next(err);
   }
 }
