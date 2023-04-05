@@ -22,6 +22,12 @@ const config = {
       rule: process.env.EXTRACT_RULE_LAZADA,
     },
   },
+  shopify: {
+    token: process.env.SHOPIFY_API_TOKEN,
+    secret_key: process.env.SHOPIFY_SECRET_KEY,
+    hostname: process.env.SHOPIFY_HOSTNAME,
+    scopes: process.env.SHOPIFY_SCOPES,
+  },
 };
 
 export default config;

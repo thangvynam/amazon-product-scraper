@@ -1,3 +1,7 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
+import '@shopify/shopify-api/adapters/node';
+import { shopifyApi, LATEST_API_VERSION } from '@shopify/shopify-api';
+import { restResources } from '@shopify/shopify-api/rest/admin/2023-01';
 import createError from 'http-errors';
 import express, { json, urlencoded } from 'express';
 import cookieParser from 'cookie-parser';
@@ -6,15 +10,32 @@ import { config } from 'dotenv';
 
 import indexRouter from './routes/index.js';
 import usersRouter from './routes/users.js';
+// eslint-disable-next-line import/no-cycle
 import productsRouter from './routes/products.js';
 import authRouter from './routes/auth.js';
 
 import authMiddleware from './middlewares/auth.js';
 
-const app = express();
-
 // load environment variables
 config();
+
+// initialize shopify api
+const shopify = shopifyApi({
+  // The next 4 values are typically read from environment variables for added security
+  apiKey: process.env.SHOPIFY_API_TOKEN,
+  apiSecretKey: process.env.SHOPIFY_SECRET_KEY,
+  scopes: process.env.SHOPIFY_SCOPES,
+  hostName: process.env.SHOPIFY_HOSTNAME,
+  apiVersion: LATEST_API_VERSION,
+  hostScheme: 'http',
+  logger: {
+    log: (severity, message) => {
+      console.log(`Shopify logger: Severity ${severity} , message = ${message}`);
+    },
+  },
+  restResources,
+});
+const app = express();
 
 // view engine setup
 // app.set('views', join(__dirname, 'views'));
@@ -46,5 +67,8 @@ app.use((err, req, res) => {
   res.status(err.status || 500);
   res.render('error');
 });
+app.listen(8888, () => {
+  console.log('Listening on port 8888');
+});
 
-export default app;
+export { app, shopify };

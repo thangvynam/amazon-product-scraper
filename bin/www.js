@@ -6,7 +6,7 @@
 
 import { createServer } from 'http';
 import debug from 'debug';
-import app from '../app.js';
+import { app } from '../app.js';
 // const debug = require('debug')('amazon-product-scraper:server');
 
 /**

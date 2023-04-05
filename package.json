@@ -27,6 +27,7 @@
   },
   "homepage": "https://bitbucket.org/thangvynam/amazon-product-scraper#readme",
   "dependencies": {
+    "@shopify/shopify-api": "^6.2.0",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "dotenv": "^16.0.3",
