@@ -1,30 +1,13 @@
-import jsonwebtoken from 'jsonwebtoken';
-import config from '../config/config.js';
+import AuthService from '../services/authService.js';
 
-function generateAccessToken(id) {
-  return jsonwebtoken.sign({ id }, config.app.tokenSecret, { expiresIn: '7d' });
-}
-
-function validate(userName) {
-  return config.app.userName.includes(userName);
-}
+const authService = new AuthService();
 
 export default function login(req, res, next) {
   try {
-    const userName = req.body.username;
-    if (!validate(userName)) {
-      return res.status(401).json({
-        ok: false,
-        error: 'Unauthorized',
-      });
-    }
-
-    const token = generateAccessToken(req.body.username);
-    return res.json({
-      username: req.body.username,
-      token,
-    });
+    const result = authService.login(req.body.username);
+    return res.json(result);
   } catch (err) {
+    console.err(err);
     return next(err);
   }
 }

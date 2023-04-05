@@ -7,11 +7,11 @@ export function getAmazonDataByKeyWord(req, res, next) {
   try {
     const queryParameter = req.query;
     const { keyword } = queryParameter;
-    productService.handleGetAmazonDataByKeyWord(keyword).then((result) => {
+    return productService.handleGetAmazonDataByKeyWord(keyword).then((result) => {
       res.json(result);
     });
   } catch (error) {
-    next(error);
+    return next(error);
   }
 }
 
@@ -27,7 +27,7 @@ export function getDataViaLink(req, res, next) {
       });
     }
 
-    productService
+    return productService
       .handleDataViaLink(link, config.extractRule[engine].rule)
       .then((result) => {
         res.json({
