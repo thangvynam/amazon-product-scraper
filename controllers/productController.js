@@ -1,4 +1,3 @@
-import { getHtmlAndExtract } from '../vendor/scrapeApi.js';
 import config from '../config/config.js';
 import ProductService from '../services/productService.js';
 
@@ -28,12 +27,14 @@ export function getDataViaLink(req, res, next) {
       });
     }
 
-    return getHtmlAndExtract(link, config.extractRule[engine].rule).then((result) => {
-      res.json({
-        ok: true,
-        data: result,
+    productService
+      .handleDataViaLink(link, config.extractRule[engine].rule)
+      .then((result) => {
+        res.json({
+          ok: true,
+          data: result,
+        });
       });
-    });
   } catch (error) {
     return next(error);
   }
