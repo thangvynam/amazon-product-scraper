@@ -19,13 +19,13 @@ This README would normally document whatever steps are necessary to get your app
     * `npm run build`
 
 
-### Contribution guidelines ###
+### Call API
+* You can use `data` folder which has collection postman 
+* eg: 
 
-* Writing tests
-* Code review
-* Other guidelines
+`
+curl --location 'localhost:3000/products?engine=lazada&link=https%3A%2F%2Fwww.lazada.vn%2Fcatalog%2F%3Fq%3Dpokemon%26from%3Dinput' \
+--header 'authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Im5hbS10aGFuZyIsImlhdCI6MTY4MDg1MDgxNywiZXhwIjoxNjgxNDU1NjE3fQ.0ZfRuliZ1x6qoC-D1SgIBNLmRv92tZQ0pvdBvFWmppk' \
+--data ''
+`
 
-### Who do I talk to? ###
-
-* Repo owner or admin
-* Other community or team contact
