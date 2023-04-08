@@ -11,6 +11,7 @@ const config = {
   },
   vendor: {
     hostVendor: process.env.HOST_VENDOR,
+    hostHighLevelVendor: process.env.HOST_HIGH_LEVEL_VENDOR,
     pathSearchByKeyWord: `${process.env.PATH_SEARCH_BY_KEYWORD}`.replace(
       'API_KEY',
       process.env.API_KEY_AMAZON,
@@ -20,6 +21,9 @@ const config = {
   extractRule: {
     lazada: {
       rule: process.env.EXTRACT_RULE_LAZADA,
+    },
+    shopee: {
+      rule: process.env.EXTRACT_RULE_SHOPEE,
     },
   },
 };

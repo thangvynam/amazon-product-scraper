@@ -28,7 +28,7 @@ export function getDataViaLink(req, res, next) {
     }
 
     return productService
-      .handleDataViaLink(link, config.extractRule[engine].rule)
+      .handleDataViaLink(link, engine)
       .then((result) => {
         res.json({
           ok: true,

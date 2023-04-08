@@ -2,6 +2,7 @@ import {
   getListAmazonProductByKeyword,
   getHtmlAndExtract,
 } from '../vendor/scrapeApi.js';
+import config from '../config/config.js';
 
 class ProductService {
   async handleGetAmazonDataByKeyWord(keyword) {
@@ -19,9 +20,36 @@ class ProductService {
     }
   }
 
-  async handleDataViaLink(link, rule) {
+  async handleDataViaLink(link, engine) {
     try {
-      return await getHtmlAndExtract(link, rule);
+      if (config.extractRule[engine] == null) {
+        return {
+          ok: false,
+          error: 'Bad request with undefined extractRule',
+        };
+      }
+
+      let params = {
+        url: link,
+        extract_rules: config.extractRule[engine].rule,
+      };
+
+      if (engine === 'shopee') {
+        params = {
+          ...params,
+          wait_for_css: '[data-sqe=\'item\']',
+        };
+      }
+
+      if (engine === 'lazada') {
+        params = {
+          ...params,
+          wait_for: 15000,
+          session: 1,
+        };
+      }
+
+      return await getHtmlAndExtract(params);
     } catch (error) {
       return {
         ok: false,
