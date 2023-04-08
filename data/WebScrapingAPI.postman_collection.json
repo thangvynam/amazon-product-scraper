@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "75eaddd2-da9e-49f9-9fec-8f87981b965f",
+		"_postman_id": "2c956104-4c17-4e56-a280-733d227b2b30",
 		"name": "WebScrapingAPI",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "3604402"
+		"_exporter_id": "5292208"
 	},
 	"item": [
 		{
@@ -21,9 +21,9 @@
 					}
 				},
 				"url": {
-					"raw": "{{prod}}/auth",
+					"raw": "{{local}}/auth",
 					"host": [
-						"{{prod}}"
+						"{{local}}"
 					],
 					"path": [
 						"auth"
@@ -51,7 +51,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "{{local}}/products?engine=lazada&link=https://www.lazada.vn/catalog/?q=vai%26from=input",
+					"raw": "{{local}}/products?engine=lazada&link=https://www.lazada.vn/catalog/?q=figure%26from=input",
 					"host": [
 						"{{local}}"
 					],
@@ -65,7 +65,7 @@
 						},
 						{
 							"key": "link",
-							"value": "https://www.lazada.vn/catalog/?q=vai%26from=input"
+							"value": "https://www.lazada.vn/catalog/?q=figure%26from=input"
 						}
 					]
 				}
@@ -108,6 +108,84 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "get shopify product",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Im5hbS10aGFuZyIsImlhdCI6MTY4MDcwNDQ5NSwiZXhwIjoxNjgxMzA5Mjk1fQ.-__cUVOOnvGIbi3iHGTTIqEWbqRS0HxEcl7cIDQ4PfM",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{local}}/products/shopify/product?id=8106779214120",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"products",
+						"shopify",
+						"product"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "8106779214120"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create new product shopify",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Im5hbS10aGFuZyIsImlhdCI6MTY4MDcwNDQ5NSwiZXhwIjoxNjgxMzA5Mjk1fQ.-__cUVOOnvGIbi3iHGTTIqEWbqRS0HxEcl7cIDQ4PfM",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"product\": {\n        \"title\": \"LVT PRIVATEBurton Custom Freestyle 151\",\n        \"body_html\": \"\\u003cstrong\\u003eGood snowboard!\\u003c\\/strong\\u003e\",\n        \"vendor\": \"LVT\",\n        \"product_type\": \"Snowboard\",\n        \"status\": \"draft\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{local}}/products/shopify/product",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"products",
+						"shopify",
+						"product"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "8106779214120",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "local",
+			"value": "http://localhost:8888"
 		}
 	]
 }

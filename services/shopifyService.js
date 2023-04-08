@@ -1,30 +1,52 @@
+/* eslint-disable class-methods-use-this */
 // eslint-disable-next-line import/no-cycle
 import { shopify } from '../app.js';
+// import SessionService from './sessionService.js';
+import config from '../config/config.js';
+import SessionService from './sessionService.js';
 
-const sessionStore = {}; // define an in-memory session store
 class ShopifyService {
-  async createProductOnStore(req, res, products) {
+  async createProductOnStore(productData) {
     try {
-      const sessionId = await shopify.session.getCurrentId({
-        rawRequest: req,
-        rawResponse: res,
+      // Extract the product data from the input JSON
+      const {
+        body_html,
+        handle,
+        images,
+        options,
+        product_type,
+        published_at,
+        published_scope,
+        status,
+        tags,
+        template_suffix,
+        title,
+        variants,
+        vendor,
+      } = productData.product;
+      const session = await SessionService.getSessionFromCache(config.shopify.session_secret_key);
+      const product = new shopify.rest.Product({ session });
+      // Set the properties of the product object
+      product.body_html = body_html;
+      product.handle = handle;
+      product.images = images;
+      product.options = options;
+      product.product_type = product_type;
+      product.published_at = published_at;
+      product.published_scope = published_scope;
+      product.status = status;
+      product.tags = tags;
+      product.template_suffix = template_suffix;
+      product.title = title;
+      product.variants = variants;
+      product.vendor = vendor;
+      const res = await product.save({
+        update: true,
       });
-
-      // use sessionId to retrieve session from app's session storage
-      // getSessionFromStorage() must be provided by application
-      const session = await this.getSessionFromStorage(sessionId);
-
-      // get a single product via its product id
-      const product = await shopify.rest.Product.find({ session, id: '8106779214120' });
-      console.log(product);
-      // product.title = 'A new title';
-
-      // await product.save({
-      //   update: true,
-      // });
 
       return {
         ok: true,
+        result: res,
       };
     } catch (error) {
       return {
@@ -34,19 +56,10 @@ class ShopifyService {
     }
   }
 
-  async findProductOnStore(req, res, id) {
+  async findProductOnStore(productId) {
     try {
-      const sessionId = await shopify.session.getCurrentId({
-        rawRequest: req,
-        rawResponse: res,
-      });
-      // use sessionId to retrieve session from app's session storage
-      // getSessionFromStorage() must be provided by application
-      const session = await this.getSessionFromStorage(sessionId);
-
-      // get a single product via its product id
-      const product = await shopify.rest.Product.find({ session, id });
-      console.log(product);
+      const session = await SessionService.getSessionFromCache(config.shopify.session_secret_key);
+      const product = await shopify.rest.Product.find({ session, productId });
       return {
         ok: true,
         data: product,
@@ -57,17 +70,6 @@ class ShopifyService {
         error,
       };
     }
-  }
-
-  async getSessionFromStorage(sessionId) {
-    return new Promise((resolve, reject) => {
-      const session = sessionStore[sessionId];
-      if (session) {
-        resolve(session);
-      } else {
-        reject(new Error('Session not found'));
-      }
-    });
   }
 }
 

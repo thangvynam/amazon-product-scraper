@@ -1,3 +1,4 @@
+/* eslint-disable class-methods-use-this */
 import jsonwebtoken from 'jsonwebtoken';
 import config from '../config/config.js';
 

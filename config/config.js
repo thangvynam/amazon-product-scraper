@@ -8,6 +8,7 @@ const config = {
     tokenSecret: process.env.TOKEN_SECRET,
     env: process.env.NODE_ENV, // 'dev' or 'prod'
     userName: process.env.USER_NAME.split(','),
+    session_key: process.env.SESSION_SECRET_KEY,
   },
   vendor: {
     hostVendor: process.env.HOST_VENDOR,
@@ -27,6 +28,7 @@ const config = {
     secret_key: process.env.SHOPIFY_SECRET_KEY,
     hostname: process.env.SHOPIFY_HOSTNAME,
     scopes: process.env.SHOPIFY_SCOPES,
+    session_secret_key: process.env.SESSION_SECRET_KEY,
   },
 };
 
