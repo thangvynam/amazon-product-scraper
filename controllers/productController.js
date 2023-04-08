@@ -1,4 +1,3 @@
-import config from '../config/config.js';
 import ProductService from '../services/productService.js';
 
 const productService = new ProductService();
