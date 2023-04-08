@@ -3,6 +3,7 @@ import {
   getHtmlAndExtract,
 } from '../vendor/scrapeApi.js';
 import config from '../config/config.js';
+import SiteFactory from './site/siteFactory.js';
 
 class ProductService {
   async handleGetAmazonDataByKeyWord(keyword) {
@@ -29,25 +30,14 @@ class ProductService {
         };
       }
 
-      let params = {
+      const site = SiteFactory.createSite(engine);
+      const option = site.getOptions();
+
+      const params = {
         url: link,
         extract_rules: config.extractRule[engine].rule,
+        ...option,
       };
-
-      if (engine === 'shopee') {
-        params = {
-          ...params,
-          wait_for_css: '[data-sqe=\'item\']',
-        };
-      }
-
-      if (engine === 'lazada') {
-        params = {
-          ...params,
-          wait_for: 15000,
-          session: 1,
-        };
-      }
 
       const result = await getHtmlAndExtract(params);
       return {

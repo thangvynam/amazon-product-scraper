@@ -37,7 +37,7 @@ export function getHtmlAndExtract(params) {
     proxy_type: 'datacenter',
     render_js: 1,
     wait_until: 'domcontentloaded',
-    timeout: 30000,
+    timeout: 40000,
   };
 
   const options = {
