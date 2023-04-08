@@ -1,3 +1,4 @@
+import Product from '../../dto/product.js';
 import Site from './site.js';
 
 class LazadaSite extends Site {
@@ -8,22 +9,25 @@ class LazadaSite extends Site {
     };
   }
 
-  // convertData() {
-  //   const { data } = this;
-  //   const result = [];
+  map() {
+    const { data } = this;
+    const products = [];
+    const array = JSON.parse(data).products;
+    array.forEach((item) => {
+      const {
+        id, title, price, link, image,
+      } = item;
 
-  //   data.forEach((item) => {
-  //     const { title, price, link, image } = item;
-  //     result.push({
-  //       title,
-  //       price,
-  //       link,
-  //       image,
-  //     });
-  //   });
+      const product = new Product(id);
+      product.product_name = title;
+      product.price = [price];
+      product.url = link;
+      product.images = [image];
+      products.push(product);
+    });
 
-  //   return result;
-  // }
+    return products;
+  }
 }
 
 export default LazadaSite;

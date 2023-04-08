@@ -1,13 +1,13 @@
 class Site {
-  constructor(data) {
-    this.data = data;
-  }
-
   getOptions() {
     return [];
   }
 
-  convertData() {
+  setData(data) {
+    this.data = data;
+  }
+
+  map() {
     return this.data;
   }
 }

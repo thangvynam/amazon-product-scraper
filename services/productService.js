@@ -39,12 +39,16 @@ class ProductService {
         ...option,
       };
 
-      const result = await getHtmlAndExtract(params);
+      const data = await getHtmlAndExtract(params);
+      site.setData(data);
+      const result = site.map();
+
       return {
         ok: true,
-        data: result,
+        data: JSON.stringify(result),
       };
     } catch (error) {
+      console.error(error);
       return {
         ok: false,
         error,
