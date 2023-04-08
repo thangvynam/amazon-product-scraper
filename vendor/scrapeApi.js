@@ -48,8 +48,6 @@ export function getHtmlAndExtract(params) {
     headers: {},
   };
 
-  console.log(options.path);
-
   return new Promise((resolve) => {
     const request = _request(options, (response) => {
       const chunks = [];

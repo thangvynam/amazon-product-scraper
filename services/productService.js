@@ -49,7 +49,11 @@ class ProductService {
         };
       }
 
-      return await getHtmlAndExtract(params);
+      const result = await getHtmlAndExtract(params);
+      return {
+        ok: true,
+        data: result,
+      };
     } catch (error) {
       return {
         ok: false,
