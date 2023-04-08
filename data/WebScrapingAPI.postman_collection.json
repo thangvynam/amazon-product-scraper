@@ -7,7 +7,7 @@
 	},
 	"item": [
 		{
-			"name": "{{prod}}/auth",
+			"name": "login",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -33,7 +33,7 @@
 			"response": []
 		},
 		{
-			"name": "{{local}}/products?engine=amazon&type=search&keyword=test",
+			"name": "get Lazada 's data",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -73,7 +73,47 @@
 			"response": []
 		},
 		{
-			"name": "{{local}}/products?engine=amazon&type=search&keyword=test",
+			"name": "get Shopee 's data",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Im5hbS10aGFuZyIsImlhdCI6MTY4MDA4MTQ4NSwiZXhwIjoxNjgwNjg2Mjg1fQ.SSXKc6QKyAkOnixszJZxg5JIqMBG8Ibky1ymof1JGvY",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{local}}/products?engine=lazada&link=https://www.lazada.vn/catalog/?q=vai%26from=input",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"products"
+					],
+					"query": [
+						{
+							"key": "engine",
+							"value": "lazada"
+						},
+						{
+							"key": "link",
+							"value": "https://www.lazada.vn/catalog/?q=vai%26from=input"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get specific data from Amazon",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
