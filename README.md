@@ -9,6 +9,9 @@ This README would normally document whatever steps are necessary to get your app
 
 ### How do I get set up? ###
 
+* Set up git hooks
+    * `cd hooks`
+    * `/bin/bash initHooks.sh`
 * Summary of set up
     * `npm i`
 * How to run tests
