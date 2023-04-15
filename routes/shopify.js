@@ -1,10 +1,11 @@
 /* eslint-disable import/no-cycle */
 import { Router } from 'express';
-import { findProductOnStore, creatProductOnStore } from '../controllers/shopify.controller.js';
+import { findProductOnStoreById, creatProductOnStore, getAllProductOnStore } from '../controllers/shopify.controller.js';
 
 const router = Router();
 
-router.get('/product', findProductOnStore);
+router.get('/product', findProductOnStoreById);
 router.post('/product', creatProductOnStore);
+router.get('/product/all', getAllProductOnStore);
 
 export default router;

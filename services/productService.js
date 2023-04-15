@@ -24,6 +24,7 @@ class ProductService {
 
   async handleDataViaLink(link, engine) {
     try {
+      console.log(link);
       if (config.extractRule[engine] == null) {
         return {
           ok: false,

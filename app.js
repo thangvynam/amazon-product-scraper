@@ -2,6 +2,7 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import '@shopify/shopify-api/adapters/node';
 import { shopifyApi, LATEST_API_VERSION } from '@shopify/shopify-api';
+import WooCommerceRestApi from '@woocommerce/woocommerce-rest-api/index.mjs';
 import { restResources } from '@shopify/shopify-api/rest/admin/2023-01';
 import createError from 'http-errors';
 import express, { json, urlencoded } from 'express';
@@ -15,7 +16,10 @@ import indexRouter from './routes/index.js';
 import usersRouter from './routes/users.js';
 // eslint-disable-next-line import/no-cycle
 import productsRouter from './routes/products.js';
+// eslint-disable-next-line import/no-cycle
 import shopifyRouter from './routes/shopify.js';
+// eslint-disable-next-line import/no-cycle
+import wooCommerceRouter from './routes/woocommerce.js';
 import authRouter from './routes/auth.js';
 
 import authMiddleware from './middlewares/auth.js';
@@ -41,6 +45,13 @@ const shopify = shopifyApi({
     },
   },
   restResources,
+});
+// initialize woocommerce api
+const woocommerceClient = new WooCommerceRestApi({
+  url: process.env.WOOCOMMERCE_URL,
+  consumerKey: process.env.WOOCOMMERCE_KEY,
+  consumerSecret: process.env.WOOCOMMERCE_SECRET,
+  version: process.env.WOOCOMMERCE_VERSION,
 });
 const app = express();
 // Configure express-session middleware
@@ -71,6 +82,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/products', authMiddleware, productsRouter);
 app.use('/shopify', authMiddleware, shopifyRouter);
+app.use('/woocommerce', authMiddleware, wooCommerceRouter);
 app.use('/auth', authRouter);
 
 // catch 404 and forward to error handler
@@ -92,4 +104,4 @@ app.listen(8888, () => {
   console.log('Listening on port 8888');
 });
 
-export { app, shopify };
+export { app, shopify, woocommerceClient };

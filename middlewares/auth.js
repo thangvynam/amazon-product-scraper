@@ -1,4 +1,4 @@
-import { verify } from 'jsonwebtoken';
+import jwt from 'jsonwebtoken';
 import config from '../config/config.js';
 
 export default (req, res, next) => {
@@ -8,26 +8,18 @@ export default (req, res, next) => {
   if (!token) {
     return res.status(401).json({
       ok: false,
-      error: 'Access denied. No token provied!',
+      error: 'Access denied. No token provided!',
     });
   }
 
   try {
-    return verify(token, config.app.tokenSecret, (err, user) => {
-      if (err) {
-        return res.status(403).json({
-          ok: false,
-          error: err,
-        });
-      }
-
-      req.user = user;
-      return next();
-    });
+    const user = jwt.verify(token, config.app.tokenSecret);
+    req.user = user;
+    return next();
   } catch (error) {
     return res.status(401).json({
       ok: false,
-      error: 'Token expired',
+      error: 'Token expired or invalid',
     });
   }
 };
