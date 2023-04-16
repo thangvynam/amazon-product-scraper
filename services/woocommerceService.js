@@ -76,16 +76,17 @@ class WooCommerceService {
     }
   }
 
-  async createLazadaProductsOnStore(keyword) {
+  async createLazadaProductsOnStoreByKeywordSearch(keyword) {
     try {
       const productService = new ProductService();
       const link = `https://www.lazada.vn/catalog/?q=${keyword}&from=input`;
+      const site = SiteFactory.createSite('woocommerce');
       const lazadaProducts = await productService.handleDataViaLink(link, 'lazada');
-      const lazadaSite = SiteFactory.createSite('lazada');
-      const products = lazadaSite.mapToWooCommerceProducts(lazadaProducts);
+      const products = site.map(lazadaProducts);
       const inputProducts = {
         create: products,
       };
+
       const response = await woocommerceClient.post('products/batch', inputProducts);
 
       return {

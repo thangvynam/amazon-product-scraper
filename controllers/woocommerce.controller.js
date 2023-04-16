@@ -8,7 +8,7 @@ export function findProductOnStoreById(req, res, next) {
     const queryParameter = req.query;
     const { id } = queryParameter;
     const { perPage } = queryParameter;
-    return woocommerceService.findProductOnStoreById(id, perPage).then((result) => {
+    return woocommerceService.findProductById(id, perPage).then((result) => {
       res.json(result);
     });
   } catch (error) {
@@ -20,7 +20,7 @@ export function getAllProductOnStore(req, res, next) {
   try {
     const queryParameter = req.query;
     const { perPage } = queryParameter;
-    return woocommerceService.getAllProductOnStore(perPage).then((result) => {
+    return woocommerceService.getAllProducts(perPage).then((result) => {
       res.json(result);
     });
   } catch (error) {
@@ -50,11 +50,11 @@ export function createProductsOnStore(req, res, next) {
   }
 }
 
-export function createLazadaProductsOnStore(req, res, next) {
+export function createLazadaProductsOnStoreByKeywordSearch(req, res, next) {
   try {
     const queryParameter = req.query;
     const { q } = queryParameter;
-    return woocommerceService.createLazadaProductsOnStore(q).then((result) => {
+    return woocommerceService.createLazadaProductsOnStoreByKeywordSearch(q).then((result) => {
       res.json(result);
     });
   } catch (error) {

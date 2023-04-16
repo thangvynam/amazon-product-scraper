@@ -24,7 +24,6 @@ class ProductService {
 
   async handleDataViaLink(link, engine) {
     try {
-      console.log(link);
       if (config.extractRule[engine] == null) {
         return {
           ok: false,
@@ -47,10 +46,9 @@ class ProductService {
 
       return {
         ok: true,
-        data: JSON.stringify(result),
+        data: result,
       };
     } catch (error) {
-      console.error(error);
       return {
         ok: false,
         error,
