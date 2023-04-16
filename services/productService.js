@@ -46,10 +46,9 @@ class ProductService {
 
       return {
         ok: true,
-        data: JSON.stringify(result),
+        data: result,
       };
     } catch (error) {
-      console.error(error);
       return {
         ok: false,
         error,

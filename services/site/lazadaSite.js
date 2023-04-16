@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import Product from '../../dto/product.js';
 import Site from './site.js';
 

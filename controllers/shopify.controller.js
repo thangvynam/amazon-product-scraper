@@ -5,11 +5,21 @@ import ShopifyService from '../services/shopifyService.js';
 const shopifyService = new ShopifyService();
 // const productService = new ProductService();
 
-export function findProductOnStore(req, res, next) {
+export function findProductOnStoreById(req, res, next) {
   try {
     const queryParameter = req.query;
     const { productId } = queryParameter;
-    return shopifyService.findProductOnStore(productId).then((result) => {
+    return shopifyService.findProductOnStoreById(productId).then((result) => {
+      res.json(result);
+    });
+  } catch (error) {
+    return next(error);
+  }
+}
+
+export function getAllProductOnStore(req, res, next) {
+  try {
+    return shopifyService.getAllProductOnStore().then((result) => {
       res.json(result);
     });
   } catch (error) {
