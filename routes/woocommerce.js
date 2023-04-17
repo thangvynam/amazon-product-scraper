@@ -1,6 +1,6 @@
 /* eslint-disable import/no-cycle */
 import { Router } from 'express';
-import { findProductOnStoreById, createAProductOnStore, createProductsOnStore, getAllProductOnStore, createLazadaProductsOnStoreByKeywordSearch } from '../controllers/woocommerce.controller.js';
+import { findProductOnStoreById, createAProductOnStore, createProductsOnStore, getAllProductOnStore, createLazadaProductsOnStoreByKeywordSearch } from '../controllers/woocommerceController.js';
 
 const router = Router();
 

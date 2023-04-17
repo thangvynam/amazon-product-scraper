@@ -1,9 +1,8 @@
 /* eslint-disable camelcase */
-import WoocommerceProduct from '../../dto/woocommerce/product.js';
-import Site from './site.js';
-import Utils from '../../utils/utils.js';
+import WoocommerceProduct from '../../../dto/woocommerce/product.js';
+import Utils from '../../../utils/utils.js';
 
-class WoocommerceSite extends Site {
+class WoocommercePopulater {
   map(data) {
     const products = [];
     const array = data.data;
@@ -15,8 +14,8 @@ class WoocommerceSite extends Site {
       const product = new WoocommerceProduct();
       product.name = product_name;
       product.type = 'simple';
-      product.regular_price = fromPrice;
-      product.sale_price = toPrice;
+      product.regular_price = parseFloat(fromPrice) * 1000;
+      product.sale_price = parseFloat(toPrice) * 1000;
       product.virtual = true;
       product.downloadable = true;
       product.categories = [];
@@ -34,4 +33,4 @@ class WoocommerceSite extends Site {
   }
 }
 
-export default WoocommerceSite;
+export default WoocommercePopulater;

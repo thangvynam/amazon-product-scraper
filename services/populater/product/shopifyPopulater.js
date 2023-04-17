@@ -1,8 +1,7 @@
 /* eslint-disable camelcase */
-import ShopifyProduct from '../../dto/shopify/product.js';
-import Site from './site.js';
+import ShopifyProduct from '../../../dto/shopify/product.js';
 
-class ShopifySite extends Site {
+class ShopifyPopulater {
   map(data) {
     const products = [];
     const array = data.data;
@@ -13,9 +12,8 @@ class ShopifySite extends Site {
       const [fromPrice, toPrice] = price;
       const product = new ShopifyProduct();
       product.name = product_name;
-      product.type = 'simple';
-      product.regular_price = fromPrice;
-      product.sale_price = toPrice;
+      product.regular_price = parseFloat(fromPrice) * 1000;
+      product.sale_price = parseFloat(toPrice) * 1000;
       product.virtual = true;
       product.downloadable = true;
       product.categories = [];
@@ -35,4 +33,4 @@ class ShopifySite extends Site {
   }
 }
 
-export default ShopifySite;
+export default ShopifyPopulater;

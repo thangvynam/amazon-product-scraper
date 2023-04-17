@@ -1,7 +1,8 @@
 // eslint-disable-next-line import/no-cycle
 import { woocommerceClient } from '../app.js';
 import ProductService from './productService.js';
-import SiteFactory from './site/siteFactory.js';
+import Populater from './populater/product/populater.js';
+import Utils from '../utils/utils.js';
 
 class WooCommerceService {
   async createAProductOnStore(product) {
@@ -79,10 +80,15 @@ class WooCommerceService {
   async createLazadaProductsOnStoreByKeywordSearch(keyword) {
     try {
       const productService = new ProductService();
-      const link = `https://www.lazada.vn/catalog/?q=${keyword}&from=input`;
-      const site = SiteFactory.createSite('woocommerce');
-      const lazadaProducts = await productService.handleDataViaLink(link, 'lazada');
-      const products = site.map(lazadaProducts);
+      const site = 'lazada';
+      const url = Utils.buildKeywordSearchURLByHost(site, `www.${site}.vn`, keyword);
+      if (url === '') {
+        throw new Error('url searching by keyword is empty');
+      }
+      console.log(`scraping product data from : ${url}`);
+      const populater = Populater.getPopulater('woocommerce');
+      const lazadaProducts = await productService.handleDataViaLink(url, site);
+      const products = populater.map(lazadaProducts);
       const inputProducts = {
         create: products,
       };

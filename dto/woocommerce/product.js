@@ -2,8 +2,8 @@ class ProductDTO {
   constructor() {
     this.name = '';
     this.type = '';
-    this.regular_price = null;
-    this.sale_price = null;
+    this.regular_price = 0;
+    this.sale_price = 0;
     this.virtual = false;
     this.downloadable = false;
     this.downloads = [];
