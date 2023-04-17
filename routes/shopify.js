@@ -1,6 +1,6 @@
 /* eslint-disable import/no-cycle */
 import { Router } from 'express';
-import { findProductOnStoreById, creatProductOnStore, getAllProductOnStore } from '../controllers/shopify.controller.js';
+import { findProductOnStoreById, creatProductOnStore, getAllProductOnStore } from '../controllers/shopifyController.js';
 
 const router = Router();
 
