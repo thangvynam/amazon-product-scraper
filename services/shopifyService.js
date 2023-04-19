@@ -32,7 +32,7 @@ class ShopifyService {
     } catch (error) {
       return {
         ok: false,
-        error,
+        error: error.message,
       };
     }
   }
@@ -48,7 +48,7 @@ class ShopifyService {
     } catch (error) {
       return {
         ok: false,
-        error,
+        error: error.message,
       };
     }
   }

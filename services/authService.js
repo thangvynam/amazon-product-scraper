@@ -29,7 +29,7 @@ class AuthService {
       console.error(err);
       return {
         username: userName,
-        error: err,
+        error: err.message,
       };
     }
   }
