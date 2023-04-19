@@ -6,3 +6,4 @@ pipelines:
         name: Sync GitHub Mirror
         script:
           - git push --mirror git@github.com:thangvynam/amazon-product-scraper.git
+          - git push --mirror git@github.com:tle246/ecom_scraping_tool.git
