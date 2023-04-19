@@ -21,10 +21,13 @@ const config = {
   },
   extractRule: {
     lazada: {
-      rule: process.env.EXTRACT_RULE_LAZADA,
+      rule: process.env.EXTRACT_RULE_LAZADA_CATEGORIES,
     },
     shopee: {
-      rule: process.env.EXTRACT_RULE_SHOPEE,
+      rule: process.env.EXTRACT_RULE_SHOPEE_CATEGORIES,
+    },
+    lazada_specific_product: {
+      rule: process.env.EXTRACT_RULE_LAZADA_SPECIFICATION_PRODUCT,
     },
   },
   shopify: {

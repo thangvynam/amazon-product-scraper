@@ -17,7 +17,7 @@ class ProductService {
     } catch (error) {
       return {
         ok: false,
-        error,
+        error: error.message,
       };
     }
   }
@@ -51,7 +51,7 @@ class ProductService {
     } catch (error) {
       return {
         ok: false,
-        error,
+        error: error.message,
       };
     }
   }

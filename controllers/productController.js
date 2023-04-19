@@ -14,6 +14,21 @@ export function getAmazonDataByKeyWord(req, res, next) {
   }
 }
 
+export function getSpecificProduct(req, res, next) {
+  try {
+    const queryParameter = req.query;
+    const { engine, link } = queryParameter;
+
+    return productService
+      .handleDataViaLink(link, engine)
+      .then((result) => {
+        res.json(result);
+      });
+  } catch (error) {
+    return next(error);
+  }
+}
+
 export function getDataViaLink(req, res, next) {
   try {
     const queryParameter = req.query;

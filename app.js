@@ -13,7 +13,6 @@ import session from 'express-session';
 import bodyParser from 'body-parser';
 
 import indexRouter from './routes/index.js';
-import usersRouter from './routes/users.js';
 // eslint-disable-next-line import/no-cycle
 import productsRouter from './routes/products.js';
 // eslint-disable-next-line import/no-cycle
@@ -79,7 +78,6 @@ app.use(cookieParser());
 // app.use(express.static(join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
 app.use('/products', authMiddleware, productsRouter);
 app.use('/shopify', authMiddleware, shopifyRouter);
 app.use('/woocommerce', authMiddleware, wooCommerceRouter);

@@ -1,4 +1,5 @@
-import LazadaSite from './lazadaSite.js';
+import LazadaSite from './lazada/lazadaSite.js';
+import LazadaSpecificProductSite from './lazada/lazadaSpecificProductSite.js';
 import ShopeeSite from './shopeeSite.js';
 
 class SiteFactory {
@@ -6,6 +7,8 @@ class SiteFactory {
     switch (site) {
       case 'lazada':
         return new LazadaSite();
+      case 'lazada_specific_product':
+        return new LazadaSpecificProductSite();
       case 'shopee':
         return new ShopeeSite();
       default:
