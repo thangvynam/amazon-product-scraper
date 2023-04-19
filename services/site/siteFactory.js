@@ -1,6 +1,6 @@
 import LazadaSite from './lazada/lazadaSite.js';
 import LazadaSpecificProductSite from './lazada/lazadaSpecificProductSite.js';
-import ShopeeSite from './shopeeSite.js';
+import ShopeeSite from './shopee/shopeeSite.js';
 
 class SiteFactory {
   static createSite(site) {

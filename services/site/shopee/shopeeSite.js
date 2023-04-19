@@ -1,5 +1,5 @@
-import Product from '../../dto/product.js';
-import Site from './site.js';
+import Product from '../../../dto/product.js';
+import Site from '../site.js';
 
 class ShopeeSite extends Site {
   getOptions() {
