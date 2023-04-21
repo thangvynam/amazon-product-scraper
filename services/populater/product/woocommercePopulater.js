@@ -1,4 +1,5 @@
 /* eslint-disable camelcase */
+import CategoryDTO from '../../../dto/woocommerce/category.js';
 import WoocommerceProduct from '../../../dto/woocommerce/product.js';
 import Utils from '../../../utils/utils.js';
 
@@ -16,9 +17,13 @@ class WoocommercePopulater {
       product.type = 'simple';
       product.regular_price = parseFloat(fromPrice) * 1000;
       product.sale_price = parseFloat(toPrice) * 1000;
-      product.virtual = true;
-      product.downloadable = true;
-      product.categories = [];
+      product.sku = id;
+      // product.sku = sku;
+      const category = new CategoryDTO();
+      category.id = 32; // id of category
+      const categories = [];
+      categories.push(category);
+      product.categories = categories;
       const srcs = [];
       images.forEach((image) => {
         const updatedImage = Utils.removeImageSuffix(image);
