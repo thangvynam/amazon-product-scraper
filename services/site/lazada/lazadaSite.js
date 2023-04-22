@@ -20,11 +20,12 @@ class LazadaSite extends Site {
       const {
         id, title, price, link, image,
       } = item;
+      const customLink = link.substr(2, link.length - 1);
 
       const product = new Product(id);
       product.product_name = title;
       product.price = [price];
-      product.url = link;
+      product.url = customLink;
       product.images = [image];
       products.push(product);
 
@@ -39,8 +40,6 @@ class LazadaSite extends Site {
       //   product.estimated_arrival_date = result.data.estimatedArrivalDate;
       // });
     });
-
-    return products;
   }
 }
 
