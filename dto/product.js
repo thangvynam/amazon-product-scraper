@@ -12,6 +12,9 @@ class ProductDTO extends IDTO {
     this.product_name = '';
     this.shipping_fee = null;
     this.estimated_arrival_date = '';
+    this.rating_count = '';
+    this.rating = '';
+    this.discount = '';
   }
 }
 
