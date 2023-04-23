@@ -11,9 +11,19 @@ class LazadaSite extends Site {
     };
   }
 
+  // mapProductDetail(products) {
+  //   products.forEach((product) => {
+  //     const productService = new ProductService();
+  //     productService.handleDataViaLink(product.url, 'lazada_specific_product').then((result) => {
+  //       console.log(result.data);
+  //     });
+  //   });
+  // }
+
   map() {
     const { data } = this;
     const products = [];
+    // console.log(data);
     const array = JSON.parse(data).products;
 
     array.forEach((item) => {
@@ -28,18 +38,9 @@ class LazadaSite extends Site {
       product.url = customLink;
       product.images = [image];
       products.push(product);
-
-      // const url = `https://lazada.vn/${link}`;
-      // const productService = new ProductService();
-      // productService.handleDataViaLink(url, 'lazada_specific_product').then((result) => {
-      //   console.log(result.data);
-      //   product.shipping_fee = result.data.shippingFee;
-      //   product.ratingCount = result.data.ratingCount;
-      //   product.rating = result.data.rating;
-      //   product.discount = result.data.discount;
-      //   product.estimated_arrival_date = result.data.estimatedArrivalDate;
-      // });
     });
+
+    return products;
   }
 }
 
