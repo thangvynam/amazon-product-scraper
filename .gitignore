@@ -50,3 +50,6 @@ Thumbs.db
 
 # Env file
 .env
+#output data
+*/data/product/*/*.json
+*/data/product/*/*.txt
