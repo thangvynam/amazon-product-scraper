@@ -1,14 +1,12 @@
 class ProductDTO {
   constructor() {
-    this.name = '';
-    this.type = 'simple';
-    this.regular_price = null;
-    this.sale_price = null;
-    this.virtual = false;
-    this.downloadable = false;
-    this.downloads = [];
-    this.categories = [];
-    this.images = [];
+    this.body_html = '';
+    this.id = 0;
+    this.options = [];
+    this.product_type = '';
+    this.status = 'draft';
+    this.title = '';
+    this.vendor = '';
   }
 }
 

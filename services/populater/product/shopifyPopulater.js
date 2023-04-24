@@ -11,21 +11,15 @@ class ShopifyPopulater {
       } = item;
       const [fromPrice, toPrice] = price;
       const product = new ShopifyProduct();
-      product.name = product_name;
-      product.regular_price = parseFloat(fromPrice) * 1000;
-      product.sale_price = parseFloat(toPrice) * 1000;
-      product.virtual = true;
-      product.downloadable = true;
-      product.categories = [];
+      product.title = product_name;
+      product.product_type = '';
       const srcs = [];
       images.forEach((image) => {
         const updatedImage = super.removeSuffix(image);
         const imageSrc = { src: updatedImage };
         srcs.push(imageSrc);
-        srcs.push(imageSrc);
       });
       product.images = srcs;
-
       products.push(product);
     });
 

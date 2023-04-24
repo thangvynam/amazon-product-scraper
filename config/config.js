@@ -9,6 +9,10 @@ const config = {
     env: process.env.NODE_ENV, // 'dev' or 'prod'
     userName: process.env.USER_NAME.split(','),
     session_key: process.env.SESSION_SECRET_KEY,
+    extract_data_path: process.env.EXTRACT_DATA_PATH,
+    extracted_list_file_name: process.env.EXTRACTED_LIST_FILE_NAME,
+    extracted_sku_list_file_name: process.env.EXTRACTED_SKU_LIST_FILE_NAME,
+    provider: process.env.SCRAPING_API_PROVIDER,
   },
   vendor: {
     hostVendor: process.env.HOST_VENDOR,
