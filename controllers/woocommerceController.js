@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 // eslint-disable-next-line import/no-cycle
 import WoocommerceService from '../services/woocommerceService.js';
 
@@ -52,9 +53,14 @@ export function createProductsOnStore(req, res, next) {
 
 export function createLazadaProductsOnStoreByKeywordSearch(req, res, next) {
   try {
-    const queryParameter = req.query;
-    const { q } = queryParameter;
-    return woocommerceService.createLazadaProductsOnStoreByKeywordSearch(q).then((result) => {
+    const { q } = req.query;
+    const { page } = req.query;
+
+    if (page == null || page === '') {
+      const data = { error: 'Missing page paramter' };
+      return res.json(data);
+    }
+    return woocommerceService.createLazadaProductsOnStoreByKeywordSearch(q, page).then((result) => {
       res.json(result);
     });
   } catch (error) {

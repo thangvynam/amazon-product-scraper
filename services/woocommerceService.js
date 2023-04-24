@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 // eslint-disable-next-line import/no-cycle
 import { woocommerceClient } from '../app.js';
 import ProductService from './productService.js';
@@ -77,34 +78,51 @@ class WooCommerceService {
     }
   }
 
-  async createLazadaProductsOnStoreByKeywordSearch(keyword) {
+  async createLazadaProductsOnStoreByKeywordSearch(keyword, page) {
     try {
-      const productService = new ProductService();
       const site = 'lazada';
-      const url = Utils.buildKeywordSearchURLByHost(site, `www.${site}.vn`, keyword);
-      if (url === '') {
-        throw new Error('url searching by keyword is empty');
+      const isDataAlreadyImported = await Utils.checkDataAlreadyImportedToStore(site, keyword, page);
+      if (!isDataAlreadyImported) {
+        let lazadaProducts = {};
+        const isDataExtracted = await Utils.checkIfDataExtracted(site, keyword, page);
+        if (!isDataExtracted) {
+          const productService = new ProductService();
+          const url = Utils.buildKeywordSearchURLByHost(site, `www.${site}.vn`, keyword, page);
+          if (!url) {
+            throw new Error('url searching by keyword is empty');
+          }
+          console.log(`scraping product data from live server : ${url}`);
+          lazadaProducts = await productService.handleDataViaLink(url, site);
+          await Utils.storeExtractedDataToFile(site, lazadaProducts, keyword, page);
+        } else {
+          lazadaProducts = await Utils.readExtractedDataFromFile(site, keyword, page);
+        }
+        const populater = Populater.getPopulater('woocommerce');
+        const products = populater.map(lazadaProducts);
+        // filter out already imported product on site by sku number
+        const skuList = await Utils.readImportedSkuFromFile(site);
+        const filteredProducts = products.filter((product) => !skuList.includes(product.sku));
+        if (filteredProducts.length === 0) {
+          throw new Error('Filtered all duplicated products. No need to import again');
+        }
+        const inputProducts = {
+          create: filteredProducts,
+        };
+        const response = await woocommerceClient.post('products/batch', inputProducts);
+        // save to imported sku product
+        await Utils.saveImportedSkuProductToFile(site, products);
+        return {
+          ok: true,
+          message: `${products.length} Lazada Products created`,
+          data: response.data,
+        };
       }
-      console.log(`scraping product data from : ${url}`);
-      const populater = Populater.getPopulater('woocommerce');
-      const lazadaProducts = await productService.handleDataViaLink(url, site);
-      const products = populater.map(lazadaProducts);
-      const inputProducts = {
-        create: products,
-      };
-
-      const response = await woocommerceClient.post('products/batch', inputProducts);
-
-      return {
-        ok: true,
-        message: 'Lazada Products created',
-        data: response.data,
-      };
+      throw new Error(`data for {keyword: ${keyword}, page: ${page}} has already imported before`);
     } catch (error) {
       return {
         ok: false,
         message: 'Failed to create Lazada products',
-        error: error.response.data,
+        error: error.message,
       };
     }
   }

@@ -29,7 +29,7 @@ export function getListAmazonProductByKeyword(keyword) {
   });
 }
 
-export function getHtmlAndExtract(params) {
+export async function getHtmlAndExtract(params) {
   const queryString = {
     ...params,
     api_key: config.vendor.apiKeyAbstract,
@@ -41,9 +41,9 @@ export function getHtmlAndExtract(params) {
   };
 
   const options = {
-    method: 'GET',
     hostname: config.vendor.hostHighLevelVendor,
     port: null,
+    method: 'GET',
     path: `/v1?${urlQueryString.stringify(queryString)}`,
     headers: {},
   };
