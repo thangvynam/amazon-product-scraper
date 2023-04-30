@@ -18,6 +18,7 @@ class LazadaSpecificProductSite extends Site {
     const dto = new ProductDetailDTO();
     dto.shippingFee = product.shippingFee;
     dto.ratingCount = product.ratingCount;
+    dto.variantImage = product.variantImage;
     dto.rating = product.rating;
     dto.discount = product.discount;
     dto.estimatedArrivalDate = product.estimatedArrivalDate;

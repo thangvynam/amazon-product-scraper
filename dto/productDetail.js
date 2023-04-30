@@ -5,6 +5,7 @@ class ProductDetailDTO {
     this.rating = '';
     this.discount = '';
     this.estimatedArrivalDate = '';
+    this.variantImage = [];
   }
 }
 export default ProductDetailDTO;
