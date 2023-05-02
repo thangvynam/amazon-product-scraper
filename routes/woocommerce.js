@@ -1,6 +1,10 @@
 /* eslint-disable import/no-cycle */
 import { Router } from 'express';
-import { findProductOnStoreById, createAProductOnStore, createProductsOnStore, getAllProductOnStore, createLazadaProductsOnStoreByKeywordSearch } from '../controllers/woocommerceController.js';
+// eslint-disable-next-line max-len
+import {
+  findProductOnStoreById, createAProductOnStore, createProductsOnStore, getAllProductOnStore,
+  createLazadaProductsOnStoreByKeywordSearch, exportOrder,
+} from '../controllers/woocommerceController.js';
 
 const router = Router();
 
@@ -9,5 +13,6 @@ router.post('/product', createAProductOnStore);
 router.post('/products', createProductsOnStore);
 router.post('/lazada/products', createLazadaProductsOnStoreByKeywordSearch);
 router.get('/product/all', getAllProductOnStore);
+router.post('/product/export', exportOrder);
 
 export default router;
