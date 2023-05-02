@@ -67,3 +67,15 @@ export function createLazadaProductsOnStoreByKeywordSearch(req, res, next) {
     return next(error);
   }
 }
+
+export function exportOrder(req, res, next) {
+  try {
+    const { q } = req.query;
+    const { page } = req.query;
+    return woocommerceService.exportOrder(q, page).then((result) => {
+      res.json(result);
+    });
+  } catch (error) {
+    return next(error);
+  }
+}

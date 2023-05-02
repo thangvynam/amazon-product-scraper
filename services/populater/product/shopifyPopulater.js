@@ -9,18 +9,22 @@ class ShopifyPopulater {
       const {
         id, sku, price, before_discount, images, product_name, shipping_fee, estimated_arrival_date,
       } = item;
-      const [fromPrice, toPrice] = price;
-      const product = new ShopifyProduct();
-      product.title = product_name;
-      product.product_type = '';
-      const srcs = [];
-      images.forEach((image) => {
-        const updatedImage = super.removeSuffix(image);
-        const imageSrc = { src: updatedImage };
-        srcs.push(imageSrc);
-      });
-      product.images = srcs;
-      products.push(product);
+      if (id) {
+        const [fromPrice, toPrice] = price;
+        const product = new ShopifyProduct();
+        product.title = product_name;
+        product.product_type = '';
+        const srcs = [];
+        images.forEach((image) => {
+          const updatedImage = super.removeSuffix(image);
+          const imageSrc = { src: updatedImage };
+          srcs.push(imageSrc);
+        });
+        product.images = srcs;
+        products.push(product);
+      } else {
+        console.log(`${JSON.stringify(item)} has empty id`);
+      }
     });
 
     return products;
